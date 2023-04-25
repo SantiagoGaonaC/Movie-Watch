@@ -1,12 +1,32 @@
 version: "3.3"
 
 networks:
-  movie-match:
+  movie-network:
     external: false
 
 services:
+  mongo:
+    container_name: movie-mongo
+    image: mongo:latest
+    restart: unless-stopped
+    networks:
+      - movie-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    volumes:
+      - ./mongo-data:/data/db
+      - type: bind
+        source: ./mongo-initdb.d
+        target: /docker-entrypoint-initdb.d
+        read_only: true
+    ports:
+      - "0.0.0.0:27024:27017"
   api:
-    container_name: movie-match-api
+    depends_on:
+      - mongo
+    container_name: movie-api
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,6 +37,6 @@ services:
         read_only: true
     restart: unless-stopped
     networks:
-      - movie-match
+      - movie-network
     ports:
-      - "0.0.0.0:80:80"
+      - "0.0.0.0:4001:4001"
