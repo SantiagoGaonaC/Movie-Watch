@@ -1,0 +1,42 @@
+version: "3.3"
+
+networks:
+  movie-network:
+    external: false
+
+services:
+  mongo:
+    container_name: movie-mongo
+    image: mongo:latest
+    restart: unless-stopped
+    networks:
+      - movie-network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: MovieDB
+    volumes:
+      - ./mongo-data:/data/db
+      - type: bind
+        source: ./mongo-initdb.d
+        target: /docker-entrypoint-initdb.d
+        read_only: true
+    ports:
+      - "0.0.0.0:27024:27017"
+  api:
+    depends_on:
+      - mongo
+    container_name: movie-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./example/config.env
+        target: /api/.env
+        read_only: true
+    restart: unless-stopped
+    networks:
+      - movie-network
+    ports:
+      - "0.0.0.0:4001:4001"

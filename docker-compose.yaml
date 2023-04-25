@@ -1,0 +1,22 @@
+version: "3.3"
+
+networks:
+  movie-match:
+    external: false
+
+services:
+  api:
+    container_name: movie-match-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./.env
+        target: /api/.env
+        read_only: true
+    restart: unless-stopped
+    networks:
+      - movie-match
+    ports:
+      - "0.0.0.0:80:80"
