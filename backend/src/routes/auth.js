@@ -4,10 +4,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
+const path = require('path');
 const { ActiveToken } = require('../models/activeToken');
 
 router.get('/', async (req, res) => {
-  res.json({ message: 'Welcome to the MovieWatch API' });
+  res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 router.post('/api/login', async (req, res) => {
