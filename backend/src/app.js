@@ -9,8 +9,6 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
-app.use(require('./routes/users'));
 app.use(require('./routes/auth'));
-app.use(require('./routes/profile'));
 
 module.exports = app;

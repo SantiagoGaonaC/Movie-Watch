@@ -58,4 +58,38 @@ router.post('/api/logout', auth, async (req, res) => {
   }
 });
 
+router.get('/api/profile', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId);
+    res.json({ name: user.name, lastName: user.lastName });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Ha ocurrido un error al obtener el perfil del usuario' });
+  }
+});
+
+router.post('/api/register', async (req, res) => {
+  const { username, password, name, lastName } = req.body;
+
+  // Verificar si el usuario ya existe
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    return res.status(409).json({ error: 'El usuario ya existe' });
+  }
+
+  // Hash de la contraseña
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+  // Crear el usuario
+  const user = new User({ username, password: hashedPassword, name, lastName });
+  try {
+    await user.save();
+    res.status(201).json({ message: 'El usuario se ha registrado con éxito' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Ha ocurrido un error al registrar el usuario' });
+  }
+});
+
 module.exports = router;
