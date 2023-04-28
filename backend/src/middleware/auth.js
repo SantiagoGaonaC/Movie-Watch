@@ -1,10 +1,13 @@
-const jwt = require('jsonwebtoken');
-const { ActiveToken} = require('../models/activeToken');
+const jwt = require("jsonwebtoken");
+const { ActiveToken } = require("../models/activeToken");
 
 const auth = async (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
+  const token = req.header("Authorization")?.replace("Bearer ", "");
+  console.log("Token recibido en middleware:", token);
   if (!token) {
-    return res.status(401).json({ error: 'Token de autenticación no proporcionado' });
+    return res
+      .status(401)
+      .json({ error: "Token de autenticación no proporcionado" });
   }
 
   try {
@@ -12,13 +15,13 @@ const auth = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const activeToken = await ActiveToken.findOne({ token: token });
     if (!activeToken) {
-      throw new Error('Token no encontrado');
+      throw new Error("Token no encontrado");
     }
     req.user = { userId: decoded.userId };
     next();
   } catch (error) {
     console.error(error);
-    res.status(401).json({ error: 'Token de autenticación inválido' });
+    res.status(401).json({ error: "Token de autenticación inválido" });
   }
 };
 

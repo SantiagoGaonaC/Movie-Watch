@@ -7,9 +7,6 @@ const auth = require('../middleware/auth');
 const path = require('path');
 const { ActiveToken } = require('../models/activeToken');
 
-router.get('/', async (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/index.html'));
-});
 
 router.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
