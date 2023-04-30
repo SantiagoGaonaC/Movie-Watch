@@ -25,9 +25,17 @@ router.post('/api/login', async (req, res) => {
 
   // Verificar si ya existe un token activo para el usuario
   const existingActiveToken = await ActiveToken.findOne({ userId: user._id });
+  const currentDate = new Date();
+
   if (existingActiveToken) {
-    // Devolver el token activo existente
-    return res.json({ token: existingActiveToken.token });
+    // Verificar si el token activo existente ha expirado
+    if (existingActiveToken.expiresAt > currentDate) {
+      // Devolver el token activo existente
+      return res.json({ token: existingActiveToken.token });
+    } else {
+      // Eliminar el token expirado
+      await ActiveToken.deleteOne({ _id: existingActiveToken._id });
+    }
   }
 
   // Crear token de autenticación
@@ -42,6 +50,7 @@ router.post('/api/login', async (req, res) => {
   // Enviar respuesta con token
   res.json({ token });
 });
+
 
 
 router.post('/api/logout', auth, async (req, res) => {

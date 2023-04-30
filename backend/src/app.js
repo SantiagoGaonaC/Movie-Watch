@@ -16,5 +16,6 @@ app.use(express.static(path.join(__dirname, '../src/views')));
 app.use(require('./routes/auth'));
 app.use(require('./routes/movie'));
 app.use(require('./routes/home'));
+app.use(require('./routes/search'));
 
 module.exports = app;
