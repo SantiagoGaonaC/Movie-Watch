@@ -1,0 +1,71 @@
+/* Estilos generales */
+body {
+  background-color: #273548;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+/* Estilos para las películas */
+#movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+
+.movie {
+  background-color: #545454;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.movie img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.movie h2 {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.movie p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Estilos para la barra de búsqueda y botones */
+#searchInput {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+#searchBtn,
+#logoutBtn {
+  margin-bottom: 1rem;
+}
+
+/* Estilos para paginación */
+#pagination {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+/* Estilos responsivos */
+@media (min-width: 768px) {
+  #searchInput {
+    width: auto;
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+
+  #searchBtn,
+  #logoutBtn {
+    margin-bottom: 0;
+  }
+}

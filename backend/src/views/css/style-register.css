@@ -11,7 +11,7 @@ body {
   padding: 20px;
 }
 
-#login-form {
+#register-form {
   background-color: #545454;
   padding: 30px;
   border-radius: 5px;
@@ -20,13 +20,13 @@ body {
   width: 100%;
 }
 
-#login-form h1 {
+#register-form h1 {
   margin-bottom: 30px;
   text-align: center;
   color: #ffffff;
 }
 
-#login-form input {
+#register-form input {
   display: block;
   width: 100%;
   margin-bottom: 20px;
@@ -35,7 +35,7 @@ body {
   border-radius: 5px;
 }
 
-#login-form button[type="submit"] {
+#register-form input[type="submit"] {
   width: 100%;
   padding: 10px;
   margin-top: 20px;
@@ -50,7 +50,7 @@ body {
   cursor: pointer;
 }
 
-#login-form #registerBtn {
+#register-form #loginBtn {
   display: block;
   width: 100%;
   padding: 10px;
@@ -66,30 +66,23 @@ body {
   cursor: pointer;
 }
 
-#login-form img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 90px;
-}
-
-#error-message {
+#messages {
   color: red;
   display: none;
 }
 
 /* Media queries */
 @media screen and (max-width: 576px) {
-  #login-form {
+  #register-form {
     padding: 20px;
   }
 
-  #login-form h1 {
+  #register-form h1 {
     font-size: 24px;
   }
 
-  #login-form button[type="submit"],
-  #login-form #registerBtn {
+  #register-form input[type="submit"],
+  #register-form #loginBtn {
     font-size: 20px;
   }
 }
