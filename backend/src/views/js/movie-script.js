@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       window.location.href = "/login.html";
       return;
     }
-    
+
     const response = await fetch("/api/popular", {
       headers: {
         Authorization: `Bearer ${authToken}`,
@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       slicedData.forEach((movie) => {
         const movieDiv = document.createElement("div");
+        movieDiv.classList.add("movie");
         const imageUrl = `https://image.tmdb.org/t/p/w220_and_h330_face${movie.poster_path}`;
         movieDiv.innerHTML = `
           <h2>${movie.title}</h2>

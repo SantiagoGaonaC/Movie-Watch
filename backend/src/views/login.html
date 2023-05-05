@@ -4,23 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/WM6xA4l4Q4L4Uz7ij7znU6ga4U6ao3SV3ltkj" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/WM6xA4l4Q4L4Uz7ij7znU6ga4U6ao3SV3ltkj"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
     <script defer src="./js/login-script.js"></script>
   </head>
   <body>
-    <img src="./css/logo.png" alt="Logo" style="position: absolute; top: 0; left: 0; width: 90px;">
+    <img
+      src="./css/logo.png"
+      alt="Logo"
+      style="position: absolute; top: 0; left: 0; width: 90px"
+    />
     <div class="container">
       <form id="login-form">
         <h1>Iniciar sesión</h1>
-        <input type="text" id="username" name="username" placeholder="Usuario" required />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Usuario"
+          required
+        />
         <br />
-        <input type="password" id="password" name="password" placeholder="Contraseña" required />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Contraseña"
+          required
+        />
         <br />
         <button type="submit">Iniciar sesión</button>
         <button id="registerBtn">Registrarse</button>
+        <p id="error-message" style="color: red; display: none"></p>
       </form>
     </div>
-    <p id="error-message" style="color: red; display: none"></p>
   </body>
 </html>
